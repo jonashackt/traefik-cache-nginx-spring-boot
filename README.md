@@ -1,6 +1,6 @@
-Spring RestTemplate calls multiple servers that are secured with multiple client certificate - setup with Docker Compose & Tested with docker-compose-rule
+traefik-cache-nginx-spring-boot 
 =============================
-[![Build Status](https://travis-ci.org/jonashackt/traefik-cache-nginx-spring-boot .svg?branch=master)](https://travis-ci.org/jonashackt/traefik-cache-nginx-spring-boot )
+[![Build Status](https://travis-ci.org/jonashackt/traefik-cache-nginx-spring-boot.svg?branch=master)](https://travis-ci.org/jonashackt/traefik-cache-nginx-spring-boot)
 
 As [Traefik](https://traefik.io/) is a really gread & modern loadbalancer, but it sadly [doesn´t feature caching right now](https://github.com/containous/traefik/issues/878). So we need to put something in front of it, that is able to do caching - like old [Nginx](https://nginx.org/en/).
 
