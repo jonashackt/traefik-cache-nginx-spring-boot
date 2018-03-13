@@ -1,0 +1,46 @@
+version: '3.4'
+
+services:
+
+  weatherclient:
+    build: ./weatherclient
+    ports:
+     - "8085:8085"
+    tty:
+      true
+    restart:
+      unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+     - "88"
+    restart:
+      always
+    volumes:
+      - nginx:/etc/nginx/conf.d:ro
+
+  traefik:
+    image: traefik
+    command: --web --docker --docker.domain=server.test --logLevel=INFO
+    networks:
+      - webgateway
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart:
+      always
+
+  weatherbackend:
+    build: ./weatherbackend
+    labels:
+     - "traefik.backend=weatherbackend"
+     - "traefik.frontend.rule=Host:weatherbackend.server.test"
+    ports:
+     - "8095"
+    tty:
+      true
+    restart:
+      unless-stopped

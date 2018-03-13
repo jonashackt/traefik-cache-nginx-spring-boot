@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.jonashackt</groupId>
+	<artifactId>traefik-cache-nginx-spring-boot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<description>Example project showing how to use Nginx as a simple cache for Traefik - incl. a Spring Boot client and server</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.9.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+    <properties>
+        <main.basedir>${project.basedir}</main.basedir>
+    </properties>
+	
+	<modules>
+        <module>weatherbackend</module>
+        <module>weatherclient</module>
+        <module>docker-network-client</module>
+    </modules>
+
+</project>
