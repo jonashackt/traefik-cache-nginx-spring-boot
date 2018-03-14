@@ -26,6 +26,13 @@ services:
     ports:
       - "80:80"
       - "8080:8080"
+    # trying to imitate a machine, where Traefik + weatherbackend + Nginx are running all on one machine with DNS active
+    # therefore trying to configure Docker DNS alias for weatherbackend to Traefik container, which should route it to
+    # weatherbackend
+    networks:
+      default:
+        aliases:
+          - weatherbackend.server.test
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart:
@@ -38,11 +45,6 @@ services:
      - "traefik.frontend.rule=Host:weatherbackend.server.test"
     ports:
      - "8095"
-    networks:
-      default:
-        aliases:
-          - weatherbackend
-          - weatherbackend.server.test
     tty:
       true
     restart:

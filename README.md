@@ -28,6 +28,21 @@ It also shows, that we simulate the whole scenario with [Docker](https://www.doc
 
 As the weatherclient only has access to the DNS alias `weatherbackend`, if it itself is part of the Docker (Compose) network, we need another way to run an Integration test inside the Docker network scope. Therefore we use the [docker-compose-rule](https://github.com/palantir/docker-compose-rule) and the __docker-network-client__ that just calls __weatherclient__ inside the Docker network.
 
+Additionally, in real world scenarios, Nginx + Traefik + weatherbackend would reside on a separate host with their own DNS configuration. So there´s a second "logical" scope here, which we could have implemented with tools like Vagrant - but this would have been overkill here. Trying to imitate a machine, where Traefik + weatherbackend + Nginx are running all on one machine with DNS configured, we configure the Docker DNS alias for weatherbackend to the Traefik container, which routes it then to the weatherbackend. This is done with the help of this Docker Compose configuration:
+
+```
+  traefik:
+    ...
+    networks:
+      default:
+        aliases:
+          - weatherbackend.server.test
+    ...
+```
+
+Instead of configuring the weatherbackend directly to have the DNS alias `weatherbackend.server.test`, we use the Traefik Docker Compose service here - which has a similar effect to a scoped machine around Nginx, Traefik & weatherbackend. We should see the call now in Traefik GUI:
+
+![first-call-weatherbackend-through-traefik-with-docker-dns-configured](first-call-weatherbackend-through-traefik-with-docker-dns-configured.png)
 
 
 
@@ -37,7 +52,12 @@ Everything you need to run a full build and __complete__ test (incl. Integration
 
 ```
 mvn clean install
+docker-compose up -d
 ```
 
-Only, if you want to check manually, you can do a `docker-compose up -d` and open your Browser with [http:localhost:8080/swagger-ui.html] and fire up a GET-Request to /secretservers with Swagger :)
+Now you can have a look at some of the components of our architecture:
+
+Traefik: http://localhost:8080/dashboard/#/
+
+weatherclient: http://localhost:8085/swagger-ui.html
 

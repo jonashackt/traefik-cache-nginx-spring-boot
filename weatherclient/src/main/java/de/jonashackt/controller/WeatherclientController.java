@@ -16,6 +16,6 @@ public class WeatherclientController {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        return restTemplate.getForObject("http://weatherbackend.server.test:8095/weather/" + cityname, String.class);
+        return restTemplate.getForObject("http://weatherbackend.server.test:80/weather/" + cityname, String.class);
     }
 }
