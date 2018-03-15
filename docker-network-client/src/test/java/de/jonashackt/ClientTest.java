@@ -23,7 +23,7 @@ public class ClientTest {
 			.waitingForService("weatherbackend", HealthChecks.toHaveAllPortsOpen())
 			.waitingForService("traefik", HealthChecks.toHaveAllPortsOpen())
 			.waitingForService("nginx", HealthChecks.toHaveAllPortsOpen())
-			.waitingForService("weatherclient",  HealthChecks.toRespondOverHttp(8080, (port) -> port.inFormat("http://$HOST:$EXTERNAL_PORT/swagger-ui.html")))
+			.waitingForService("weatherclient",  HealthChecks.toRespondOverHttp(8085, (port) -> port.inFormat("http://$HOST:$EXTERNAL_PORT/swagger-ui.html")))
 			.build();
 
 	@Test
