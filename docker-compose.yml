@@ -12,9 +12,16 @@ services:
       unless-stopped
 
   nginx:
-    image: nginx:alpine
+    build: ./nginx
     ports:
-     - "88"
+     - "8088:80"
+    # trying to imitate a machine, where Traefik + weatherbackend + Nginx are running all on one machine with DNS active
+    # therefore trying to configure Docker DNS alias for weatherbackend to Traefik container, which should route it to
+    # weatherbackend
+    networks:
+      default:
+        aliases:
+          - weatherbackend.server.test
     restart:
       always
     volumes:
@@ -26,13 +33,6 @@ services:
     ports:
       - "80:80"
       - "8080:8080"
-    # trying to imitate a machine, where Traefik + weatherbackend + Nginx are running all on one machine with DNS active
-    # therefore trying to configure Docker DNS alias for weatherbackend to Traefik container, which should route it to
-    # weatherbackend
-    networks:
-      default:
-        aliases:
-          - weatherbackend.server.test
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart:

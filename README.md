@@ -28,7 +28,11 @@ It also shows, that we simulate the whole scenario with [Docker](https://www.doc
 
 As the weatherclient only has access to the DNS alias `weatherbackend`, if it itself is part of the Docker (Compose) network, we need another way to run an Integration test inside the Docker network scope. Therefore we use the [docker-compose-rule](https://github.com/palantir/docker-compose-rule) and the __docker-network-client__ that just calls __weatherclient__ inside the Docker network.
 
-Additionally, in real world scenarios, Nginx + Traefik + weatherbackend would reside on a separate host with their own DNS configuration. So there´s a second "logical" scope here, which we could have implemented with tools like Vagrant - but this would have been overkill here. Trying to imitate a machine, where Traefik + weatherbackend + Nginx are running all on one machine with DNS configured, we configure the Docker DNS alias for weatherbackend to the Traefik container, which routes it then to the weatherbackend. This is done with the help of this Docker Compose configuration:
+### Nginx + Traefik + weatherbackend in logical scope (aka host) with the help of Docker DNS
+
+Additionally, in real world scenarios, Nginx + Traefik + weatherbackend would reside on a separate host with their own DNS configuration. So there´s a second "logical" scope here, which we could have implemented with tools like Vagrant - but this would have been overkill here.
+
+Trying to imitate a machine, where Traefik + weatherbackend + Nginx are running all on one machine with DNS configured, we configure the [Docker DNS alias](https://docs.docker.com/v17.09/engine/userguide/networking/configure-dns/) for weatherbackend to the Traefik container, which routes it then to the weatherbackend. This is done with the help of this Docker Compose configuration ([see the docs](https://docs.docker.com/compose/compose-file/#aliases)):
 
 ```
   traefik:
@@ -60,4 +64,6 @@ Now you can have a look at some of the components of our architecture:
 Traefik: http://localhost:8080/dashboard/#/
 
 weatherclient: http://localhost:8085/swagger-ui.html
+
+Nginx: http://localhost:8088/
 
