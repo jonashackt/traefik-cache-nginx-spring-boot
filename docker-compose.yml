@@ -29,7 +29,7 @@ services:
 
   traefik:
     image: traefik
-    command: --web --docker --docker.domain=server.test --logLevel=INFO
+    command: --api --docker --docker.domain=server.test --logLevel=DEBUG
     ports:
       - "80:80"
       - "8080:8080"
