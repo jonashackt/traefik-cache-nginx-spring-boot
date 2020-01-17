@@ -34,6 +34,11 @@ Everything you need to run a full build and __complete__ test (incl. Integration
 
 ```
 mvn clean install
+```
+
+Only if you want to check everything manually - which you for sure want to do :) - fire up all components with:
+
+```
 docker-compose up -d
 ```
 
