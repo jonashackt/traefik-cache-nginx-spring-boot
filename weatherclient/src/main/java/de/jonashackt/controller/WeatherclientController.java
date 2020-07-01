@@ -38,4 +38,11 @@ public class WeatherclientController {
 
         return responseEntity.getBody();
     }
+
+    @GetMapping("/noproxy/forecast/{cityname}")
+    @ResponseStatus(HttpStatus.OK)
+    public String forecastWithoutProxy(@PathVariable("cityname") String cityname) {
+
+        return restTemplate.getForEntity("http://weatherbackend:8095/weather/" + cityname, String.class).getBody();
+    }
 }

@@ -1,11 +1,11 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:11-jdk-slim
 
 MAINTAINER Jonas Hecht
 
 VOLUME /tmp
 
 # Add Spring Boot app.jar to Container
-ADD "target/weatherbackend-0.0.1-SNAPSHOT.jar" app.jar
+ADD "target/weatherbackend-*.jar" app.jar
 
 ENV JAVA_OPTS=""
 

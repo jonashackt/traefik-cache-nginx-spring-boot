@@ -14,10 +14,10 @@
 	</parent>
 
 	<properties>
-		<springfox.version>2.7.0</springfox.version>
-		<rest-assured.version>3.0.5</rest-assured.version>
+		<rest-assured.version>4.2.0</rest-assured.version>
+		<springdoc-openapi.version>1.4.1</springdoc-openapi.version>
 		<commons-io.version>2.5</commons-io.version>
-		<pdfbox.version>2.0.7</pdfbox.version>
+		<pdfbox.version>2.0.20</pdfbox.version>
 	</properties>
 
 	<dependencies>
@@ -46,17 +46,11 @@
 			<scope>optional</scope>
 		</dependency>
 
-		<!-- Swaggerfox REST Live Docu -->
+		<!-- springdoc-openapi (Springfox Swagger successor) for REST API live docs -->
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${springfox.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${springfox.version}</version>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc-openapi.version}</version>
 		</dependency>
 
 		<!-- Testing -->
