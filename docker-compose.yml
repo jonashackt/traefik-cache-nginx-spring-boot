@@ -29,20 +29,32 @@ services:
 
   traefik:
     image: traefik
-    command: --api --docker --docker.domain=server.test --logLevel=DEBUG
+    command:
+      # - "--logLevel=DEBUG"
+      - "--api.insecure=true"
+      # Enabling docker provider
+      - "--providers.docker=true"
+      # Do not expose containers unless explicitly told so
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
     restart:
       always
 
   weatherbackend:
     build: ./weatherbackend
     labels:
-     - "traefik.backend=weatherbackend"
-     - "traefik.frontend.rule=Host:weatherbackend.server.test"
+      # Explicitly tell Traefik to expose this container
+      - "traefik.enable=true"
+      # The domain the service will respond to
+      - "traefik.http.routers.weatherbackend.rule=Host(`weatherbackend.server.test`)"
+      # Allow request only from the predefined entry point named "web"
+      - "traefik.http.routers.whoami.entrypoints=web"
     ports:
      - "8095"
     tty:
