@@ -37,7 +37,6 @@ services:
       # Do not expose containers unless explicitly told so
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
-
     ports:
       - "80:80"
       - "8080:8080"
