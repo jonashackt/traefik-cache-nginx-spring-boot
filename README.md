@@ -54,6 +54,78 @@ weatherclient: http://localhost:8085/swagger-ui.html
 
 Nginx: http://localhost:8088/
 
+
+#### Alternative variant without Docker-Compose for the Dockerized Spring Boot backends
+
+In a real world DevOps scenario, you may want to run Traefik separate from the Dockerized Spring Boot backends - so that each Backend is able to have it's own CI/CD pipeline for example (e.g. GitLab CI).
+
+Now in this case you don't want a central `docker-compose.yml`, since you want to run and scale all the services independently.
+
+There's a way to run Traefik and the backends separately, as shown in the [docker-compose-traefik-only.yml](docker-compose-traefik-only.yml) [without-compose.sh](without-compose.sh) files:
+
+```yaml
+version: '3.8'
+
+services:
+
+  traefik:
+    image: traefik
+    command:
+      # - "--logLevel=DEBUG"
+      - "--api.insecure=true"
+      # Enabling docker provider
+      - "--providers.docker=true"
+      # Do not expose containers unless explicitly told so
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    networks:
+      - traefiknet
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    restart:
+      always
+
+networks:
+  traefiknet:
+```
+
+
+```shell script
+#!/usr/bin/env bash
+
+echo "[-->] Start Traefik using Compose as usual"
+docker-compose -f docker-compose-traefik-only.yml up -d
+
+echo "[-->] Startup weatherbackend without Compose - but connect to Traefik"
+docker build ./weatherbackend --tag weatherbackend
+docker run \
+  --rm \
+  -d \
+  -p 8095 \
+  --label="traefik.enable=true" \
+  --label="traefik.http.routers.whoami.entrypoints=web" \
+  --label="traefik.http.routers.weatherbackend.rule=Host(\`weatherbackend.server.test\`)" \
+  --network="traefik-cache-nginx-spring-boot_traefiknet" \
+  --name weatherbackend \
+  weatherbackend
+
+echo "[-->] Startup weatherclient without Compose - but connect to Traefik"
+docker build ./weatherclient --tag weatherclient
+docker run \
+  --rm \
+  -d \
+  -p 8085:8085 \
+  --network="traefik-cache-nginx-spring-boot_traefiknet" \
+  --name weatherclient \
+  weatherclient
+```
+
+The downside of this approach is, that one cannot use the scaling option of Docker-Compose now so easily.
+
+
 ## Nginx + Traefik + weatherbackend in logical scope (aka host) with the help of Docker DNS
 
 Additionally, in real world scenarios, Nginx + Traefik + weatherbackend would reside on a separate host with their own DNS configuration. So there´s a second "logical" scope here, which we could have implemented with tools like Vagrant - but this would have been overkill here.

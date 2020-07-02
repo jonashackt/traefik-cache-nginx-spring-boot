@@ -53,7 +53,7 @@ public class WeatherBackendController {
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = "text/plain")
     public String whatsTheSenseInThat(@PathVariable("name") String name) {
-        LOG.info("Request for /{name} with GET");
+        LOG.info("Request for /weather/{" + name + "} with GET");
         return "Hello " + name + "! This is a RESTful HttpService written in Spring. Try to use some other HTTP verbs (don´t say 'methods' :P ) :)";
     }
 
