@@ -50,10 +50,10 @@ services:
     labels:
       # Explicitly tell Traefik to expose this container
       - "traefik.enable=true"
+      # Allow request only from the predefined entry point named "web"
+      - "traefik.http.routers.weatherbackend.entrypoints=web"
       # The domain the service will respond to
       - "traefik.http.routers.weatherbackend.rule=Host(`weatherbackend.server.test`)"
-      # Allow request only from the predefined entry point named "web"
-      - "traefik.http.routers.whoami.entrypoints=web"
     ports:
      - "8095"
     tty:
