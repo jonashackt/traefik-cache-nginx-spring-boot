@@ -5,7 +5,7 @@ MAINTAINER Jonas Hecht
 VOLUME /tmp
 
 # Add Spring Boot app.jar to Container
-ADD "target/weatherclient-*.jar" app.jar
+ADD "target/*.jar" app.jar
 
 ENV JAVA_OPTS=""
 
