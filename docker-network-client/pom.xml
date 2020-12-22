@@ -15,7 +15,7 @@
 
 	<properties>
 		<rest-assured.version>4.2.0</rest-assured.version>
-		<docker-compose-rule-junit4.version>1.5.0</docker-compose-rule-junit4.version>
+		<testcontainers.version>1.15.0</testcontainers.version>
 	</properties>
 
 	<dependencies>
@@ -39,21 +39,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.palantir.docker.compose</groupId>
-			<artifactId>docker-compose-rule-junit4</artifactId>
-			<version>${docker-compose-rule-junit4.version}</version>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
+			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>bintray</id>
-			<name>Bintray Maven Repository - as docker-compose-rule-junit4 is only available there</name>
-			<url>https://dl.bintray.com/palantir/releases</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
 
 </project>

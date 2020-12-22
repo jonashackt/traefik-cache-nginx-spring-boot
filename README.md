@@ -1,10 +1,10 @@
 traefik-cache-nginx-spring-boot 
 =============================
-[![Build Status](https://travis-ci.com/jonashackt/traefik-cache-nginx-spring-boot.svg?branch=master)](https://travis-ci.com/jonashackt/traefik-cache-nginx-spring-boot)
+[![Build Status](https://github.com/jonashackt/traefik-cache-nginx-spring-boot/workflows/github/badge.svg)](https://github.com/jonashackt/traefik-cache-nginx-spring-boot/actions)
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/jonashackt/traefik-cache-nginx-spring-boot/blob/master/LICENSE)
 [![renovateenabled](https://img.shields.io/badge/renovate-enabled-yellow)](https://renovatebot.com)
 [![versionspringboot](https://img.shields.io/badge/dynamic/xml?color=brightgreen&url=https://raw.githubusercontent.com/jonashackt/traefik-cache-nginx-spring-boot/master/pom.xml&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27parent%27%5D%2F%2A%5Blocal-name%28%29%3D%27version%27%5D&label=springboot)](https://github.com/spring-projects/spring-boot)
-[![versiondockercomposerulejunit4](https://img.shields.io/badge/dynamic/xml?color=brightgreen&url=https://raw.githubusercontent.com/jonashackt/traefik-cache-nginx-spring-boot/master/docker-network-client/pom.xml&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27properties%27%5D%2F%2A%5Blocal-name%28%29%3D%27docker-compose-rule-junit4.version%27%5D&label=docker-compose-rule-junit4)](https://github.com/spring-projects/spring-boot)
+[![versiontestcontainers](https://img.shields.io/badge/dynamic/xml?color=brightgreen&url=https://raw.githubusercontent.com/jonashackt/traefik-cache-nginx-spring-boot/master/docker-network-client/pom.xml&query=%2F%2A%5Blocal-name%28%29%3D%27project%27%5D%2F%2A%5Blocal-name%28%29%3D%27properties%27%5D%2F%2A%5Blocal-name%28%29%3D%27testcontainers.version%27%5D&label=testcontainers)](https://www.testcontainers.org/)
 
 As [Traefik](https://traefik.io/) is a really gread & modern loadbalancer, but it sadly [doesn´t feature caching right now](https://github.com/containous/traefik/issues/878). So we need to put something in front of it, that is able to do caching - like old [Nginx](https://nginx.org/en/).
 
