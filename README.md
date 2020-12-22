@@ -1,5 +1,6 @@
 traefik-cache-nginx-spring-boot 
 =============================
+[![Build Status](https://github.com/jonashackt/java1-examples/workflows/github/badge.svg)](https://github.com/jonashackt/java1-examples/traefik-cache-nginx-spring-boot )
 [![Build Status](https://travis-ci.com/jonashackt/traefik-cache-nginx-spring-boot.svg?branch=master)](https://travis-ci.com/jonashackt/traefik-cache-nginx-spring-boot)
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/jonashackt/traefik-cache-nginx-spring-boot/blob/master/LICENSE)
 [![renovateenabled](https://img.shields.io/badge/renovate-enabled-yellow)](https://renovatebot.com)
