@@ -15,4 +15,12 @@ jobs:
         java-version: 15
 
     - name: Build with Maven
-      run: mvn -B install --no-transfer-progress --file pom.xml
+      run: mvn -B install -DskipTests=ture --no-transfer-progress --file pom.xml
+
+    - name: run Docker-Compose & a command inside one of the Compose containers inside the same step
+      run: |
+        docker-compose up -d
+        docker-compose exec weatherbackend pwd
+
+    - name: run a command inside one of the Compose containers in another step
+      run: docker-compose exec weatherbackend pwd
