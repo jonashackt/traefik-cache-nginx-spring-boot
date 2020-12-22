@@ -43,15 +43,7 @@ public class WeatherclientController {
     @ResponseStatus(HttpStatus.OK)
     public String forecastTraefikOnly(@PathVariable("cityname") String cityname) {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Host", "weatherbackend.server.test");
-
-        ResponseEntity<String> responseEntity = restTemplate.exchange("http://traefik/weather/" + cityname,
-                HttpMethod.GET,
-                new HttpEntity<String>(null, headers),
-                String.class);
-
-        return responseEntity.getBody();
+        return restTemplate.getForEntity("http://weatherbackend.server.test/weather/" + cityname, String.class).getBody();
     }
 
     @GetMapping("/noproxy/forecast/{cityname}")
