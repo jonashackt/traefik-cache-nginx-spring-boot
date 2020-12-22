@@ -10,7 +10,7 @@ docker run \
   -d \
   -p 8095 \
   --label="traefik.enable=true" \
-  --label="traefik.http.routers.whoami.entrypoints=web" \
+  --label="traefik.http.routers.weatherbackend.entrypoints=web" \
   --label="traefik.http.routers.weatherbackend.rule=Host(\`weatherbackend.server.test\`)" \
   --network="traefik-cache-nginx-spring-boot_traefiknet" \
   --name weatherbackend \
