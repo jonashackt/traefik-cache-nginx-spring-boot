@@ -14,8 +14,5 @@ jobs:
       with:
         java-version: 15
 
-    - name: Show whats up in GH actions
-      run: ls -la
-
     - name: Build with Maven
       run: mvn -B install --no-transfer-progress --file pom.xml
