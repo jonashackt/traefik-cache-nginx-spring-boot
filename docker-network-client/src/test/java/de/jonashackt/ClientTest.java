@@ -1,16 +1,17 @@
 package de.jonashackt;
 
-import com.palantir.docker.compose.DockerComposeRule;
-import com.palantir.docker.compose.connection.waiting.HealthChecks;
 import org.apache.http.HttpStatus;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.testcontainers.containers.DockerComposeContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
+
+import java.io.File;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.containsString;
 
 @RunWith(SpringRunner.class)
@@ -18,13 +19,13 @@ import static org.hamcrest.Matchers.containsString;
 public class ClientTest {
 
 	@ClassRule
-	public static DockerComposeRule docker = DockerComposeRule.builder()
-			.file("../docker-compose.yml")
-			.waitingForService("weatherbackend", HealthChecks.toHaveAllPortsOpen())
-			.waitingForService("traefik", HealthChecks.toHaveAllPortsOpen())
-			.waitingForService("nginx", HealthChecks.toHaveAllPortsOpen())
-			.waitingForService("weatherclient",  HealthChecks.toRespondOverHttp(8085, (port) -> port.inFormat("http://$HOST:$EXTERNAL_PORT/swagger-ui.html")))
-			.build();
+	public static DockerComposeContainer services =
+			new DockerComposeContainer(new File("../docker-compose.yml"))
+					.withExposedService("weatherbackend", 8095, Wait.forListeningPort())
+					.withExposedService("traefik", 8080, Wait.forListeningPort())
+					.withExposedService("nginx", 80, Wait.forListeningPort())
+					.withExposedService("weatherclient", 8085, Wait.forHttp("/swagger-ui.html").forStatusCode(200));
+
 
 	@Test
 	public void is_weatherclient_able_to_call_weatherbackend_through_nginx_and_traefik() {
