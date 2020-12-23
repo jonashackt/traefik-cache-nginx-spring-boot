@@ -2,15 +2,12 @@ package de.jonashackt;
 
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static io.restassured.RestAssured.given;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(
 		classes = WeatherclientApplication.class,
 		webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
@@ -18,8 +15,9 @@ import static io.restassured.RestAssured.given;
 )
 public class WeatherclientTest {
 
-	@Ignore
-	@Test public void
+	@Disabled
+	@Test
+	public void
 	should_retrieve_simple_response_form_weatherbackend() {
 
 		given()
