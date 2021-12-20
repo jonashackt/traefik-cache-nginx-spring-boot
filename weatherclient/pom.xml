@@ -15,7 +15,7 @@
 
 	<properties>
 		<rest-assured.version>4.4.0</rest-assured.version>
-		<springdoc-openapi.version>1.6.1</springdoc-openapi.version>
+		<springdoc-openapi.version>1.6.2</springdoc-openapi.version>
 	</properties>
 
 	<dependencies>
