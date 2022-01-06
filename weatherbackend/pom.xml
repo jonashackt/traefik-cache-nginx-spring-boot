@@ -15,7 +15,7 @@
 
 	<properties>
 		<rest-assured.version>4.4.0</rest-assured.version>
-		<springdoc-openapi.version>1.6.3</springdoc-openapi.version>
+		<springdoc-openapi.version>1.6.4</springdoc-openapi.version>
 		<commons-io.version>2.11.0</commons-io.version>
 		<pdfbox.version>2.0.25</pdfbox.version>
 	</properties>
