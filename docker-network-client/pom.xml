@@ -14,7 +14,7 @@
 	</parent>
 
 	<properties>
-		<rest-assured.version>4.5.0</rest-assured.version>
+		<rest-assured.version>4.5.1</rest-assured.version>
 		<testcontainers.version>1.16.3</testcontainers.version>
 	</properties>
 
